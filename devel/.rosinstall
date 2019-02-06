@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/rigel/ROS_ws/Roombot/devel/setup.sh

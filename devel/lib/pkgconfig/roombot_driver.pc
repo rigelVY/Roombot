@@ -1,0 +1,8 @@
+prefix=/home/rigel/ROS_ws/Roombot/devel
+
+Name: roombot_driver
+Description: Description of roombot_driver
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/rigel/ROS_ws/Roombot/devel/lib 
+Requires: 
