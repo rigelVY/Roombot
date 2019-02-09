@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  tf
 )
 
 ## System dependencies are found with CMake's conventions
@@ -199,8 +200,11 @@ include_directories(
 # catkin_add_nosetests(test)
 
 add_executable(roombot_joy_to_twist src/roombot_joy_to_twist.cpp)
+add_executable(roombot_rviz_sim src/roombot_rviz_sim.cpp)
 
 target_link_libraries(roombot_joy_to_twist ${catkin_LIBRARIES})
+target_link_libraries(roombot_rviz_sim ${catkin_LIBRARIES})
+
 
 
 
