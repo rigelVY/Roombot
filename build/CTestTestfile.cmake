@@ -5,6 +5,7 @@
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
 subdirs(gtest)
-subdirs(roomba_rover)
-subdirs(roomba_test)
-subdirs(roombot_driver)
+subdirs(control/roomba_rover)
+subdirs(control/roomba_test)
+subdirs(system/roombot_gazebo)
+subdirs(control/roombot_driver)

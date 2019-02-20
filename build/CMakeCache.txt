@@ -363,22 +363,28 @@ message_runtime_DIR:PATH=/opt/ros/kinetic/share/message_runtime/cmake
 pluginlib_DIR:PATH=/opt/ros/kinetic/share/pluginlib/cmake
 
 //Value Computed by CMake
-roomba_rover_BINARY_DIR:STATIC=/home/rigel/ROS_ws/Roombot/build/roomba_rover
+roomba_rover_BINARY_DIR:STATIC=/home/rigel/ROS_ws/Roombot/build/control/roomba_rover
 
 //Value Computed by CMake
-roomba_rover_SOURCE_DIR:STATIC=/home/rigel/ROS_ws/Roombot/src/roomba_rover
+roomba_rover_SOURCE_DIR:STATIC=/home/rigel/ROS_ws/Roombot/src/control/roomba_rover
 
 //Value Computed by CMake
-roomba_test_BINARY_DIR:STATIC=/home/rigel/ROS_ws/Roombot/build/roomba_test
+roomba_test_BINARY_DIR:STATIC=/home/rigel/ROS_ws/Roombot/build/control/roomba_test
 
 //Value Computed by CMake
-roomba_test_SOURCE_DIR:STATIC=/home/rigel/ROS_ws/Roombot/src/roomba_test
+roomba_test_SOURCE_DIR:STATIC=/home/rigel/ROS_ws/Roombot/src/control/roomba_test
 
 //Value Computed by CMake
-roombot_driver_BINARY_DIR:STATIC=/home/rigel/ROS_ws/Roombot/build/roombot_driver
+roombot_driver_BINARY_DIR:STATIC=/home/rigel/ROS_ws/Roombot/build/control/roombot_driver
 
 //Value Computed by CMake
-roombot_driver_SOURCE_DIR:STATIC=/home/rigel/ROS_ws/Roombot/src/roombot_driver
+roombot_driver_SOURCE_DIR:STATIC=/home/rigel/ROS_ws/Roombot/src/control/roombot_driver
+
+//Value Computed by CMake
+roombot_gazebo_BINARY_DIR:STATIC=/home/rigel/ROS_ws/Roombot/build/system/roombot_gazebo
+
+//Value Computed by CMake
+roombot_gazebo_SOURCE_DIR:STATIC=/home/rigel/ROS_ws/Roombot/src/system/roombot_gazebo
 
 //The directory containing a CMake configuration file for rosconsole.
 rosconsole_DIR:PATH=/opt/ros/kinetic/share/rosconsole/cmake
@@ -536,7 +542,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=6
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=7
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

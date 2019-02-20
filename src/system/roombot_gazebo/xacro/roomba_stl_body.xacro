@@ -1,0 +1,200 @@
+<robot name="roomba" xmlns:xacro="http://ros.org/wiki/xacro">
+  <material name="purple">
+    <color rgba="1.0 0.0 1.0 2.5"/>
+  </material>  
+  <material name="grey">
+    <color rgba="0.5 0.5 0.5 2.5"/>
+  </material>
+
+  <xacro:macro name="wheel_macro" params="parent prefix xyz">
+    <joint name="${prefix}_joint" type="continuous">
+      <origin xyz="${xyz}" rpy="${radians(-90)} 0 0"/>
+      <parent link="${parent}"/>
+      <child  link="${prefix}_link"/>
+      <axis xyz="0 0 1" />
+      <limit velocity="12.0" effort="0.4" />
+      <dynamics damping="0.1"/>
+    </joint>
+    <transmission name="${prefix}_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}_joint">
+          <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}_motor">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        <mechanismReduction>1</mechanismReduction>
+      </actuator>
+    </transmission>
+    <link name="${prefix}_link">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.1"/>
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+      </inertial>
+      <visual>
+        <geometry>
+          <cylinder radius="0.03" length="0.01" />
+        </geometry>
+        <material name="grey"/>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.03" length="0.01" />
+        </geometry>
+      </collision>
+    </link>
+    <gazebo reference="${prefix}_link">
+      <material>Gazebo/Grey</material>
+      <mu1 value="2.5" />
+      <mu2 value="2.5" />
+      <kp value="50000" />
+      <kd value="10" />
+    </gazebo>
+  </xacro:macro> 
+
+  <xacro:wheel_macro prefix="left_wheel"  parent="base_link" xyz="0 0.1 0.03"/>
+  <xacro:wheel_macro prefix="right_wheel" parent="base_link" xyz="0 -0.1 0.03"/>
+
+  <link name="base_link"/>
+
+  <joint name="body_joint" type="fixed">
+    <parent link="base_link"/>
+    <child  link="body_link"/>
+    <origin xyz="-0.05 0 0.02" rpy="0 0 0"/>
+  </joint>
+  <link name="body_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://roombot_gazebo/stl/Roomba_model.stl" />
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="purple"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://roombot_gazebo/stl/Roomba_model.stl" />
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="purple"/>
+    </collision>
+  </link>
+  <gazebo reference="body_link">
+    <material>Gazebo/Purple</material>
+  </gazebo>
+
+  <joint name="ball_joint" type="fixed">
+    <parent link="base_link"/>
+    <child  link="ball_link"/>
+    <origin xyz="-0.14 0 0.02" rpy="0 0 0"/>
+  </joint>
+  <link name="ball_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.02" />
+      </geometry>
+      <material name="grey" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.02" />
+      </geometry>
+      <material name="grey" />
+    </collision>
+  </link>
+  <gazebo reference="ball_link">
+    <material>Gazebo/Grey</material>
+    <mu1 value="0.5" />
+    <mu2 value="0.5" />
+  </gazebo>
+  
+  <xacro:macro name="imu_macro" params="parent prefix xyz">
+    <joint name="imu_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child  link="${prefix}_link"/>
+      <origin xyz="${xyz}" rpy="0 0 0"/>
+    </joint>
+    <link name="${prefix}_link"/>
+    <gazebo reference="${prefix}_link">
+      <gravity>true</gravity>
+      <sensor name="imu_sensor" type="imu">
+        <always_on>true</always_on>
+        <update_rate>100</update_rate>
+        <visualize>true</visualize>
+        <topic>data</topic>
+        <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+          <topicName>${prefix}/data</topicName>
+          <bodyName>${prefix}_link</bodyName>
+          <updateRateHZ>10.0</updateRateHZ>
+          <gaussianNoise>0.0</gaussianNoise>
+          <xyzOffset>0 0 0</xyzOffset>
+          <rpyOffset>0 0 0</rpyOffset>
+          <frameName>${prefix}_link</frameName>
+        </plugin>
+        <pose>0 0 0 0 0 0</pose>
+      </sensor>
+    </gazebo>
+  </xacro:macro> 
+
+  <xacro:imu_macro prefix="imu" parent="base_link" xyz="-0.05 0 0"/>
+
+  <xacro:macro name="camera_macro" params="parent prefix xyz">
+    <joint name="${prefix}_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child  link="${prefix}_link"/>
+      <origin xyz="${xyz}" rpy="${radians(-90)} 0 ${radians(-90)}"/>
+    </joint>
+    <link name="${prefix}_link"/>
+    <gazebo reference="${prefix}_link">
+      <sensor type="camera" name="${prefix}">
+        <update_rate>10.0</update_rate>
+        <camera name="${prefix}">
+          <pose>0 0 0 0 ${radians(-90)} ${radians(90)}</pose>
+          <horizontal_fov>1.3962634</horizontal_fov>
+          <image>
+            <width>800</width>
+            <height>600</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+        </camera>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>0.0</updateRate>
+          <cameraName>${prefix}</cameraName>
+          <imageTopicName>image_raw</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>${prefix}_link</frameName>
+          <hackBaseline>0.07</hackBaseline>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro> 
+
+  <xacro:camera_macro prefix="camera" parent="base_link" xyz="-0.05 0 0.1"/>
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/dtw_robot</robotNamespace>
+    </plugin>
+  </gazebo>
+</robot>
