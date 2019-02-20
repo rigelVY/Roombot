@@ -2,14 +2,14 @@
   <arg name="model" default="$(find roombot_gazebo)/xacro/roomba_stl_body.xacro" />
   <arg name="joy" default="false" />
   <arg name="mode" default="sim" />
+  <arg name="rvizconfig" default="$(find roombot_gazebo)/rviz/move_roombot_default.rviz" />
   <param name="robot_description" command="$(find xacro)/xacro $(arg model) --inorder"/>
 
-  <group if="$(arg joy)">
-    <node name="joy_node"   pkg="joy" type="joy_node" />
-    <node name="roombot_joy_to_twist" pkg="roombot_driver" type="roombot_joy_to_twist" />
-  </group>
-
   <group if="$(eval mode=='robot')">
+    <group if="$(arg joy)">
+      <node name="joy_node"   pkg="joy" type="joy_node" />
+      <node name="roombot_joy_to_twist" pkg="roombot_driver" type="roombot_joy_to_twist" />
+    </group>
     <node name="roombot_twist_to_tf" pkg="roombot_driver" type="roombot_twist_to_tf"/>
     <node name="twist_marker_visualizer" pkg="roombot_driver" type="twist_marker_visualizer"/>
   </group>
@@ -22,6 +22,12 @@
       <arg name="headless" value="false"/>
       <arg name="debug" value="false"/>
     </include>
+    <group if="$(arg joy)">
+      <node name="joy_node"   pkg="joy" type="joy_node" />
+      <node name="roombot_joy_to_twist" pkg="roombot_driver" type="roombot_joy_to_twist" >
+        <remap from="cmd_vel" to="dtw_robot/diff_drive_controller/cmd_vel" />
+      </node>
+    </group>
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model dtw_robot" />
     <rosparam command="load" file="$(find roombot_gazebo)/config/diff_drive_controller.yaml" ns="/dtw_robot" />
     <rosparam command="load" file="$(find roombot_gazebo)/config/joint_state_controller.yaml" ns="/dtw_robot"/>
@@ -29,5 +35,5 @@
   </group>
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" ns="/dtw_robot"/>
-  <node name="rviz" pkg="rviz" type="rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
 </launch>
