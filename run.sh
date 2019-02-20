@@ -11,4 +11,5 @@
 # realsense D435iのセンサデータ出力用launchファイルとroombot_driverのlaunchファイルを実行
 gnome-terminal -e "bash -c 'source /opt/ros/kinetic/setup.bash; source ~/ROS_ws/catkin_ws/devel/setup.bash; roslaunch realsense2_camera rs_camera.launch'"
 sleep 3s
-gnome-terminal -e "bash -c 'source /opt/ros/kinetic/setup.bash; source ~/ROS_ws/Roombot/devel/setup.bash; roslaunch roombot_driver move_robot.launch joy:=true'"
+
+gnome-terminal -e "bash -c 'source /opt/ros/kinetic/setup.bash; source ~/ROS_ws/Roombot/devel/setup.bash; roslaunch roombot_gazebo move_roombot.launch joy:=true'"

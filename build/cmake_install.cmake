@@ -117,9 +117,10 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/rigel/ROS_ws/Roombot/build/gtest/cmake_install.cmake")
-  include("/home/rigel/ROS_ws/Roombot/build/roomba_rover/cmake_install.cmake")
-  include("/home/rigel/ROS_ws/Roombot/build/roomba_test/cmake_install.cmake")
-  include("/home/rigel/ROS_ws/Roombot/build/roombot_driver/cmake_install.cmake")
+  include("/home/rigel/ROS_ws/Roombot/build/control/roomba_rover/cmake_install.cmake")
+  include("/home/rigel/ROS_ws/Roombot/build/control/roomba_test/cmake_install.cmake")
+  include("/home/rigel/ROS_ws/Roombot/build/system/roombot_gazebo/cmake_install.cmake")
+  include("/home/rigel/ROS_ws/Roombot/build/control/roombot_driver/cmake_install.cmake")
 
 endif()
 

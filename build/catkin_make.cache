@@ -1,2 +1,2 @@
-roomba_rover:roomba_test:roombot_driver
+control/roomba_rover:control/roomba_test:control/roombot_driver:system/roombot_gazebo
 -DCATKIN_DEVEL_PREFIX=/home/rigel/ROS_ws/Roombot/devel -DCMAKE_INSTALL_PREFIX=/home/rigel/ROS_ws/Roombot/install -G Unix Makefiles
