@@ -1,2 +1,2 @@
-control/roomba_rover:control/roomba_test:control/roombot_driver:system/roombot_gazebo
+control/roomba_rover:control/roomba_test:control/roombot_driver:perception/realsense-2.1.4/ddynamic_reconfigure:perception/realsense-2.1.4/realsense2_camera:system/roombot_gazebo
 -DCATKIN_DEVEL_PREFIX=/home/rigel/ROS_ws/Roombot/devel -DCMAKE_INSTALL_PREFIX=/home/rigel/ROS_ws/Roombot/install -G Unix Makefiles

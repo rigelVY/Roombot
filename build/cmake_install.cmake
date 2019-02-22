@@ -120,6 +120,8 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/rigel/ROS_ws/Roombot/build/control/roomba_rover/cmake_install.cmake")
   include("/home/rigel/ROS_ws/Roombot/build/control/roomba_test/cmake_install.cmake")
   include("/home/rigel/ROS_ws/Roombot/build/system/roombot_gazebo/cmake_install.cmake")
+  include("/home/rigel/ROS_ws/Roombot/build/perception/realsense-2.1.4/ddynamic_reconfigure/cmake_install.cmake")
+  include("/home/rigel/ROS_ws/Roombot/build/perception/realsense-2.1.4/realsense2_camera/cmake_install.cmake")
   include("/home/rigel/ROS_ws/Roombot/build/control/roombot_driver/cmake_install.cmake")
 
 endif()
