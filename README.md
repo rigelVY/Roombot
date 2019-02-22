@@ -10,14 +10,19 @@ Roombaのハードウェア制御用ドライバーパッケージ。
 なお、Roomba制御用パッケージとしてAutonomyLabさんのcreate_autonomyを使用させて頂いた。  
 [Github AutonomyLab/create_autonomy](https://github.com/AutonomyLab/create_autonomy)  
 
+また、realsense D435iを使用する上で、公式のROSパッケージを使用させて頂いた。
+[Github intel-ros/realsense](https://github.com/intel-ros/realsense)  
 
 #### Node list
 - sample1
 - sample2
 
+### perception
 
 
-### roombot_recognition
+### recognition
 
 
-### roombot_navigation
+### planning
+
+### control
