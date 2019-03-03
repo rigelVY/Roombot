@@ -1,8 +1,0 @@
-prefix=/home/rigel/ROS_ws/Roombot/install
-
-Name: roombot_gazebo
-Description: Description of roombot_gazebo
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/rigel/ROS_ws/Roombot/install/lib 
-Requires: 
