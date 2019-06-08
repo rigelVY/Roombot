@@ -1,0 +1,8 @@
+prefix=/home/rigel/ROS_ws/Roombot/devel
+
+Name: ddynamic_reconfigure
+Description: Description of ddynamic_reconfigure
+Version: 0.0.6
+Cflags: -I/home/rigel/ROS_ws/Roombot/devel/include -I/home/rigel/ROS_ws/Roombot/src/perception/realsense-2.1.4/ddynamic_reconfigure/include
+Libs: -L/home/rigel/ROS_ws/Roombot/devel/lib -lddynamic_reconfigure
+Requires: 

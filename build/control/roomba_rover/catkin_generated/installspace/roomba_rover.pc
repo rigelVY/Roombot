@@ -1,0 +1,8 @@
+prefix=/home/rigel/ROS_ws/Roombot/install
+
+Name: roomba_rover
+Description: Description of roomba_rover
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/rigel/ROS_ws/Roombot/install/lib 
+Requires: 
