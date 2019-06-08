@@ -1,8 +1,0 @@
-prefix=/home/rigel/ROS_ws/Roombot/install
-
-Name: roomba_test
-Description: Description of roomba_test
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/rigel/ROS_ws/Roombot/install/lib 
-Requires: 
